@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Room Page</title>
+    <meta name="UTF-8" />
+    <meta name="viewport" content="width=divice-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <link href="{{url_for('static', filename='css/style_room.css')}}" type="text/css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/bc76649983.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4Upwu9yGADRljnP0xwER5gSIToQZKfIM"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="navbar-overlay" onclick="toggleMenuOpen()"></div>
+
+            <button type="button" class="navbar-burger" onclick="toggleMenuOpen()">
+                <span class="material-icons">menu</span>
+            </button>
+            <div class="text-left">
+                <h1 class="navbar-title">Hotel</h1>
+            </div>
+
+            <div class="text-right">
+                <nav class="navbar-menu">
+                    <a class="nav-link nav-link-ltr" href="/">Home</a>
+                    <a class="nav-link nav-link-ltr" href="/profile">Profile</a>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="container-main">
+            <section class="room-info">
+                <div class="hotel">
+                    {%for d in room_info%}
+                    <div class="hotel-name">
+                        <h1>{{d['name']}} - {{d['city']}}, {{d['area']}}</h1>
+                    </div>
+                    <div class="buttons-links">
+                        <div class="hotel-heart">
+                            {% if users_rating > 0 %}
+                            <p>{{users_rating}}</p>
+                            {% else %}
+                            <p>-</p>
+                            {% endif %}
+                        </div>
+                        <div class="booked">
+                            <form method="POST" action="/room_page/{{d['room_id']}}/booking">
+                                <input type="hidden" name="room_id" value="{{d['room_id']}}">
+                                <button type="submit">Reserve a Room</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="media">
+                    <img src="{{ url_for('static', filename=d['photo_url']) }}" alt="room" width="100%" height="auto">
+                </div>
+                <div class="hotel-second">
+                    <div class="icons">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <h4>COUNT OF GUESTS</h4>
+                        <h4>{{room_type}}</h4>
+
+                    </div>
+                    <div class="icons">
+                        <i class="fa fa-bed" aria-hidden="true"></i>
+                        <h4>TYPE OF ROOM</h4>
+                        {% for room_type in type_of_room %}
+                        <h4>{{ room_type }}</h4>
+                        {% endfor %}
+                    </div>
+                    <div class="icons">
+                        <i class="fa fa-car" aria-hidden="true"></i>
+                        <h4>PARKING</h4>
+                        {% if d['parking'] == 1 %}
+                        <h4>Yes</h4>
+                        {% else %}
+                        <h4>No</h4>
+                        {% endif %}
+                    </div>
+                    <div class="icons">
+                        <i class="fa fa-wifi" aria-hidden="true"></i>
+                        <h4>WIFI</h4>
+                        {% if d['wifi'] == 1 %}
+                        <h4>Yes</h4>
+                        {% else %}
+                        <h4>No</h4>
+                        {% endif %}
+                    </div>
+                    <div class="icons">
+                        <i class="fa fa-paw" aria-hidden="true"></i>
+                        <h4>PET FRIENDLY</h4>
+                        {% if d['pet_friendly'] == 1 %}
+                        <h4>Yes</h4>
+                        {% else %}
+                        <h4>No</h4>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="hotel-third">
+                    <div class="descr">
+                        <h3>Room Description</h3>
+                        <p>{{d['description_long']}}</p>
+                    </div>
+
+                    {% endfor %}
+                </div>
+                <!-- <div class="googleMaps" id="googleMap" style="width:100%;height:400px;"></div>
+
+                <script>
+                    function initMap() {
+                        // Create a map object and specify the center and zoom level
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            center: { lat: 37.928353641377356, lng: 23.689553163331734 }, //  coordinates
+                            zoom: 15
+                        });
+                    }
+                </script>
+                <script
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4Upwu9yGADRljnP0xwER5gSIToQZKfIM&callback=initMap"
+                    async defer></script> -->
+
+                <div class="dotted-line"></div>
+
+                <div class="reviews-posted">
+                    <h2>Guest Reviews</h2>
+                    <div class="comments-section">
+                        {% if user_reviews %}
+                        {%for review in user_reviews%}
+                        <div class="comments-details">
+                            <h3>{{review["name"]}}</h3>
+                            <p>{{review["comment"]}}</p>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p>No reviews yet</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="add-review">
+                    <h2>Add Review</h2>
+                    <form method="POST" id="reviewForm" action="/room_page/{{room_id}}/review">
+                        <div class="selectdiv">
+                            <div class="rate-sec">
+                                <p>Rate:</p>
+                            </div>
+                            <div class="rating-section">
+                                <select name="rating">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="text-review">
+                            <textarea name="comment" rows="4" cols="50"></textarea>
+                        </div>
+                        <div class="sumbit-button">
+                            <input class="button-sumbit" type="submit" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+
+
+    <footer class="light">
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="text-center">Ⓒ Designed by Neo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='javascript/review_validation.js') }}"></script>
+</body>
+
+</html>

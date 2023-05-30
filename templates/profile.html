@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Profile Page</title>
+    <meta name="UTF-8" />
+    <meta name="viewport" content="width=divice-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <link href="{{url_for('static', filename='css/style_list.css')}}" type="text/css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/bc76649983.js"></script>
+
+</head>
+
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-overlay" onclick="toggleMenuOpen()"></div>
+
+            <button type="button" class="navbar-burger" onclick="toggleMenuOpen()">
+                <span class="material-icons">menu</span>
+            </button>
+            <div class="text-left">
+                <h1 class="navbar-title">Hotel</h1>
+            </div>
+
+            <div class="text-right">
+                <nav class="navbar-menu">
+                    <a class="nav-link nav-link-ltr" href="/">Home</a>
+                    <a class="nav-link nav-link-ltr" href="/profile">Profile</a>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="container-main">
+            <aside class="hotel-search">
+                <div class="form-title">
+                    <h1>REVIEWS</h1>
+                </div>
+                <div class="personal-reviews">
+                    {% for review in user_reviews %}
+                    <ul style="list-style-type:none">
+                        <li>{{review['name']}} : {{review['rate']}}</li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </aside>
+            <section class="search-results">
+                <div class="search-bar">
+                    <h2>My Bookings</h2>
+                </div>
+                {%for booked in booked_rooms%}
+                <article class="hotel">
+                    <aside class="media">
+                        <img src="{{ url_for('static', filename=booked['photo_url']) }}" alt="room1" width="100%"
+                            height="auto">
+                    </aside>
+                    <main class="info">
+                        <h1>{{booked['name']}}</h1>
+                        <h2>{{booked['city']}}, {{booked['area']}}</h2>
+                        <p>{{booked['description_short']}}</p>
+                        <div class="text-right">
+
+                        </div>
+                    </main>
+                    <div class="clear"></div>
+                    <div class="more-info">
+                        <div class="per-night">
+                            <h3>Price: {{booked['total_price']}}€</h3>
+                        </div>
+                        <div class="guests-info">
+                            <h3>Check in Date: {{booked['check_in_date']}}</h3>
+                        </div>
+                        <div class="type-info">
+                            <h3>Check out Date: {{booked['check_out_date']}}</h3>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </section>
+        </div>
+
+
+    </main>
+
+
+
+
+
+
+    <footer class="light">
+        <div class="container">
+            <div class="footer">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="text-center">Ⓒ Designed by NeoKol</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

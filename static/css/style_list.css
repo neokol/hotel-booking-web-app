@@ -1,0 +1,562 @@
+/* Basic Rules */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Satoshi';
+    font-weight: 100;
+}
+
+/* Footer Style */
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #1A1D4E;
+    color: #ABBBC1;
+    text-align: center;
+    font-size: 12px;
+    border-top: 4px solid #102E60;
+}
+
+/* Header Style */
+
+/* Header Bar Style */
+
+.nav-link {
+    font-size: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #1A1D4E;
+    padding: 20px 0px 20px 0px;
+    margin: 0px 30px;
+    display: inline-block;
+    position: relative;
+    opacity: 0.75;
+}
+
+.nav-link:hover {
+    opacity: 1;
+}
+
+.nav-link::before {
+    transition: 300ms;
+    height: 5px;
+    content: "";
+    position: absolute;
+    background-color: #1A1D4E;
+}
+
+.nav-link-ltr::before {
+    width: 0%;
+    bottom: 10px;
+}
+
+.nav-link-ltr:hover::before {
+    width: 100%;
+}
+
+.text-left {
+    padding-left: 300px;
+}
+
+.text-right {
+    padding-right: 300px;
+}
+
+
+.navbar {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 64px;
+    background: #fefefe;
+    color: #1A1D4E;
+    font-family: "Satoshi";
+    box-sizing: border-box;
+    box-shadow: 0px 1px 15px 5px rgba(0, 0, 0, 0.25);
+}
+
+@media only screen and (min-width: 600px) {
+    .navbar {
+        justify-content: space-between;
+        padding: 0 0 0 16px;
+    }
+}
+
+.navbar-overlay {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+body.open .navbar-overlay {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media only screen and (min-width: 600px) {
+    .navbar-overlay {
+        display: none;
+    }
+}
+
+.navbar-burger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    padding: 0;
+}
+
+@media only screen and (min-width: 600px) {
+    .navbar-burger {
+        display: none;
+    }
+}
+
+.navbar-title {
+    margin: 0;
+    font-size: 22px;
+}
+
+.navbar-menu {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    translate: -100% 0;
+    width: 270px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #1A1D4E;
+    visibility: hidden;
+    transition: translate 0.3s;
+}
+
+body.open .navbar-menu {
+    translate: 0 0;
+    visibility: visible;
+}
+
+@media only screen and (min-width: 600px) {
+    .navbar-menu {
+        position: static;
+        translate: 0 0;
+        width: auto;
+        background: transparent;
+        flex-direction: row;
+        visibility: visible;
+    }
+}
+
+.navbar-menu>button {
+    color: rgba(255, 255, 255, 0.5);
+    background: transparent;
+    padding: 0 8px;
+}
+
+.navbar-menu>button.active {
+    color: inherit;
+}
+
+/* MAIN SECTION */
+
+/* Search results bar */
+.search-bar {
+    background: #1A1D4E;
+    color: #fefefe;
+    border-radius: 4px;
+    padding: 0px 25px;
+}
+
+.search-bar h2 {
+    font-weight: 200;
+}
+
+/* Hotel List Results */
+
+article.hotel {
+    padding: 40px 0 15px 0;
+    margin: 0 0 25px 0;
+    border-bottom: 1px dotted rgb(107, 107, 107);
+}
+
+
+
+/* remove line from the last  */
+article.hotel:last-child {
+    border-bottom: none;
+}
+
+article.hotel h1 {
+    color: #000000;
+    font-size: 20px;
+    font-weight: 200;
+    text-transform: uppercase;
+    line-height: 35px;
+    margin: 10px 0 0 0;
+    padding: 0;
+}
+
+article.hotel h2 {
+    color: gray;
+    font-size: 15px;
+    font-weight: 200;
+    text-transform: uppercase;
+    line-height: 35px;
+    margin: 0;
+    padding: 0;
+}
+
+article.hotel p {
+    color: rgb(92, 92, 92);
+    font-size: 16px;
+    line-height: 14px;
+    word-break: break-word;
+}
+
+.text-right {
+    text-align: right;
+}
+
+article.hotel .media,
+article.hotel .info {
+    float: left;
+}
+
+article.hotel .media {
+    width: 20%;
+}
+
+article.hotel .info {
+    width: 75%;
+    box-sizing: border-box;
+    padding: 0 0 0 25px;
+    margin: 0 0 0 5%;
+    border-left: 3px solid #051747;
+}
+
+.clear {
+    clear: both;
+}
+
+
+
+/* Style of Go to Room Page Button */
+article.hotel .page-button {
+    padding: 5px 0;
+    font-size: 16px;
+    width: 100%;
+    background-color: #051747;
+    color: white;
+    font-weight: 300;
+    border-radius: 6px;
+    width: 35%;
+    border: none;
+}
+
+
+.text-right-link {
+    text-decoration: none;
+    background-color: #102E60;
+    color: #C1C2CD;
+    text-align: right;
+    border-radius: 10px;
+    width: 150px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.text-right-link a {
+    text-decoration: none;
+    color: #C1C2CD;
+}
+
+.text-right-link a:hover {
+    text-decoration: none;
+    color: #ABBBC1;
+}
+
+.text-right-link a:visited {
+    text-decoration: none;
+    color: #C1C2CD;
+
+}
+
+
+
+
+/* Style of the info under the text of every room */
+.more-info {
+    display: flex;
+    padding-top: 30px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    gap: 5px;
+}
+
+.per-night {
+    font-weight: 200;
+    background: #535f80;
+    color: #e7e9f0;
+    width: 20%;
+    text-align: center;
+    font-size: 14px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.guests-info,
+.type-info {
+    font-weight: 100;
+    background: #e7e9f0;
+    font-size: 14px;
+    width: 40%;
+    text-align: center;
+    color: #051747;
+    border-radius: 10px;
+
+}
+
+
+
+
+
+
+button a,
+button a:active,
+button a:visited,
+button a:focus {
+    text-decoration: none;
+    background-color: #051747;
+    color: #fefefe;
+    border: none;
+    font-size: 20px;
+    border-radius: 4px;
+}
+
+button a:hover {
+    background-color: #081f62;
+}
+
+
+button {
+    border: none;
+    text-decoration: none;
+    background: #fefefe;
+}
+
+/* Display the form and the search results inline */
+aside.hotel-search {
+    width: 250px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 25px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px 4px rgba(0, 0, 0, 0.11);
+    border-radius: 5px;
+
+}
+
+section.search-results {
+    width: 750px;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    padding: 0 25px;
+
+}
+
+
+
+
+
+
+
+/* Use this trick to center the mainpage */
+.container-main {
+    width: 1004px;
+    margin: 120px auto;
+    display: flex;
+}
+
+
+
+/* Form settings */
+aside form select,
+aside form textarea,
+aside form input {
+    width: 100%;
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 4px;
+    padding: 10px 5px;
+    margin: 5px 0 15px 0;
+    background: #e7e9f0;
+    text-align: center;
+}
+
+aside form label {
+    margin: 10px 0 0 0;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+aside form input[type="button"] {
+    padding: 5px 0;
+    font-size: 18px;
+    width: 100%;
+    background-color: #051747;
+    color: #fefefe;
+    font-weight: 300;
+}
+
+aside form fieldset {
+    border: none;
+    width: 100%;
+    padding: 10px 1px;
+    margin: 5px 0 15px 0;
+}
+
+aside .form-title h1 {
+    font-size: 18px;
+    color: #051747;
+    text-align: center;
+    font-weight: 300;
+}
+
+aside form input[type="number"] {
+    font-weight: 200;
+    font-size: 12px;
+    width: 100%;
+    background: #e7e9f0;
+    text-align: center;
+    height: 0px;
+    -moz-appearance: textfield;
+}
+
+/* style of numbers of search bar */
+aside .amounts-selected {
+    display: flex;
+}
+
+aside .amounts-min {
+    text-align: left;
+    padding: 0 25px 0 0;
+    height: 10px;
+}
+
+aside .amounts-max {
+    text-align: right;
+    padding: 0 0 0 25px;
+}
+
+/* SECOND PAGE ABOUT PROFILE PAGE */
+.hotel-titles h4 {
+    font-size: 22px;
+    color: #081f62;
+    font-weight: 200;
+}
+
+/* Create a double slider */
+
+.range-slider {
+    height: 5px;
+    border-radius: 2px;
+    background-color: #e7e9f0;
+    /* position: relative; */
+}
+
+.range-selected {
+    height: 100%;
+    left: 30%;
+    right: 30%;
+    border-radius: 5px;
+    background-color: #081f62;
+}
+
+.range-input {
+    position: relative;
+    padding-bottom: 25px;
+}
+
+.range-input input {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    top: -17px;
+    background: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+}
+
+.range-input input::-webkit-slider-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 0px solid #051747;
+    background-color: #051747;
+    pointer-events: auto;
+    -webkit-appearance: none;
+}
+
+.range-input input::-moz-range-thumb {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    border: 0px solid #051747;
+    background-color: #051747;
+    pointer-events: auto;
+    -moz-appearance: none;
+}
+
+.range-price {
+    /* margin: 30px 0; */
+    width: 100%;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.range-price label {
+    margin-right: 5px;
+}
+
+/* .range-price input {
+    width: 40px;
+    padding: 5px;
+} */
+
+.range-price input:first-of-type {
+    margin-right: 10px;
+}
+
+
+
+/* add error class if error occurs */
+.error {
+    border: 2px red solid;
+}

@@ -1,0 +1,422 @@
+/* Basic Rules */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Satoshi';
+    font-weight: 200;
+}
+
+.container-main {
+    width: 1004px;
+    margin: 120px auto;
+}
+
+/* Footer Style */
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #1A1D4E;
+    color: #ABBBC1;
+    text-align: center;
+    font-size: 12px;
+    border-top: 4px solid #102E60;
+}
+
+/* Header Style */
+
+.nav-link {
+    font-size: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #1A1D4E;
+    padding: 20px 0px 20px 0px;
+    margin: 0px 30px;
+    display: inline-block;
+    position: relative;
+    opacity: 0.75;
+}
+
+.nav-link:hover {
+    opacity: 1;
+}
+
+.nav-link::before {
+    transition: 300ms;
+    height: 5px;
+    content: "";
+    position: absolute;
+    background-color: #1A1D4E;
+}
+
+.nav-link-ltr::before {
+    width: 0%;
+    bottom: 10px;
+}
+
+.nav-link-ltr:hover::before {
+    width: 100%;
+}
+
+.text-left {
+    padding-left: 300px;
+}
+
+.text-right {
+    padding-right: 300px;
+}
+
+
+.navbar {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 64px;
+    background: #fefefe;
+    color: #1A1D4E;
+    font-family: "Satoshi";
+    box-sizing: border-box;
+    box-shadow: 0px 1px 15px 5px rgba(0, 0, 0, 0.25);
+}
+
+@media only screen and (min-width: 600px) {
+    .navbar {
+        justify-content: space-between;
+        padding: 0 0 0 16px;
+    }
+}
+
+.navbar-overlay {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+body.open .navbar-overlay {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media only screen and (min-width: 600px) {
+    .navbar-overlay {
+        display: none;
+    }
+}
+
+.navbar-burger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    padding: 0;
+}
+
+@media only screen and (min-width: 600px) {
+    .navbar-burger {
+        display: none;
+    }
+}
+
+.navbar-title {
+    margin: 0;
+    font-size: 22px;
+}
+
+.navbar-menu {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    translate: -100% 0;
+    width: 270px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #1A1D4E;
+    visibility: hidden;
+    transition: translate 0.3s;
+}
+
+body.open .navbar-menu {
+    translate: 0 0;
+    visibility: visible;
+}
+
+@media only screen and (min-width: 600px) {
+    .navbar-menu {
+        position: static;
+        translate: 0 0;
+        width: auto;
+        background: transparent;
+        flex-direction: row;
+        visibility: visible;
+    }
+}
+
+.navbar-menu>button {
+    color: rgba(255, 255, 255, 0.5);
+    background: transparent;
+    padding: 0 8px;
+}
+
+.navbar-menu>button.active {
+    color: inherit;
+}
+
+
+/* Main Homepage */
+
+
+/* Bar of Name and other data */
+
+section.room-info .hotel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1A1D4E;
+    color: #fefefe;
+    font-size: 12px;
+    border-radius: 5px;
+    width: auto;
+    height: 50px;
+
+}
+
+.hotel-name {
+    width: 60%;
+    padding-left: 5px;
+}
+
+.hotel-review {
+    width: 20%;
+    border-right: 1px solid #fefefe;
+    border-left: 1px solid #fefefe;
+    padding-left: 8px;
+}
+
+.hotel-heart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    font-size: 20px;
+    border-radius: 30px;
+    background-color: #ABBBC1;
+    margin: 5px;
+    height: 25px;
+
+}
+
+.booked {
+    margin: 20px;
+}
+
+.buttons-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+button {
+    padding: 4px 30px;
+    border: 0;
+    border-radius: 100px;
+    background-color: #ABBBC1;
+    color: #fefefe;
+    font-weight: Bold;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+
+button:hover {
+    background-color: #EC707E;
+    box-shadow: 0 0 20px #6fc5ff50;
+    transform: scale(1.1);
+}
+
+button:active {
+    background-color: #ABBBC1;
+    transition: all 0.25s;
+    -webkit-transition: all 0.25s;
+    box-shadow: none;
+    transform: scale(0.98);
+}
+
+/* Style for room photo */
+.media {
+    width: 70%;
+    padding-top: 40px;
+}
+
+/* Second bar info */
+
+.hotel-second {
+    display: flex;
+    color: #fefefe;
+    font-size: 8px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 5px;
+}
+
+.icons i {
+    font-size: 20px;
+    padding-top: 8px;
+}
+
+.icons {
+    width: 20%;
+    text-align: center;
+    background: #1A1D4E;
+    margin-right: 10px;
+    border-radius: 15px;
+}
+
+.icons:last-child {
+    border-right: none;
+}
+
+.icons h4 {
+    font-size: 10px;
+}
+
+/* Third bar info */
+
+.descr {
+    border-left: 3px solid #051747;
+    padding-left: 10px;
+}
+
+.descr p {
+    color: rgb(88, 88, 88);
+}
+
+.booked {
+    background: #081f62;
+    color: #fefefe;
+    font-weight: 200;
+    text-align: center;
+    width: 15%;
+    font-size: 14px;
+    border-radius: 4px;
+    float: right;
+    margin-bottom: 20px;
+}
+
+
+/* Google maps */
+
+.googleMaps {
+    padding-top: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* Draw Line under maps */
+.dotted-line {
+    border-bottom: 2px dotted #051747;
+}
+
+
+
+/* Reviews Part */
+
+/* Reviews Part */
+
+.reviews-posted {
+    border-left: 2px solid #051747;
+    padding-left: 10px;
+}
+
+.co .add-review {
+    border-left: 2px solid #051747;
+    padding-left: 10px;
+}
+
+
+
+.sumbit-button {
+    padding-top: 20px;
+}
+
+.comments-section {
+    display: flex;
+    gap: 20px;
+
+}
+
+.comments-details {
+    background-color: #C1C2CD;
+    border-radius: 5px;
+    height: 150px;
+    width: 30%;
+    padding-left: 15px;
+}
+
+/*  rating Style */
+
+.add-review {
+    border-left: 2px solid #051747;
+    padding-left: 10px;
+}
+
+.selectdiv {
+    display: flex;
+    align-items: center;
+}
+
+.rate-sec {
+    margin-right: 10px;
+}
+
+.rating-section select {
+    width: 100px;
+}
+
+form input[type="submit"] {
+    padding: 12px 0;
+    font-size: 16px;
+    width: 15%;
+    background-color: #102E60;
+    color: #fefefe;
+    font-weight: 300;
+    border-radius: 6px;
+    border: none;
+    text-align: center;
+}
+
+
+form input[type="submit"]:hover {
+    background-color: #1A1D4E;
+}
+
+
+.active {
+    color: #081f62;
+}
+
+
+.error {
+    border: 1px solid red;
+}
