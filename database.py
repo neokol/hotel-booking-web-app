@@ -3,7 +3,7 @@ from sqlalchemy import text
 import json
 from datetime import datetime
 
-engine = create_engine("mysql+pymysql://root:password@localhost/hotel?charset=utf8mb4")
+engine = create_engine("mysql+pymysql://frl14ezd9s9n7uenomdz:pscale_pw_HSTg6wVMmdAVAA6fT2lAemZR0PxISDGtlyNvauLuhV3@aws.connect.psdb.cloud/hotel?charset=utf8mb4")
 
 
 # Function to get  distinct cities for the select
