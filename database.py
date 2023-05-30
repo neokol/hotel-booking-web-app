@@ -2,8 +2,9 @@ from sqlalchemy import create_engine
 from sqlalchemy import text
 import json
 from datetime import datetime
+import os
 
-db_connection_string = "mysql+pymysql://46oj3s14ffb6bd67inye:pscale_pw_Bh3fHsHx3AA4m0U1M4gBf7jMUx9i04LXCtn9dFFSvKA@aws.connect.psdb.cloud/hotel"
+db_connection_string = os.environ["DB_CONNECTION_STRING"]
 
 engine = create_engine(db_connection_string,
                        connect_args={"ssl": {
