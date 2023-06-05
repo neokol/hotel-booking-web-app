@@ -14,8 +14,12 @@ engine = create_engine(db_connection_string,
 
 # Function to get  distinct cities for the select
 def load_distinct_cities():
+  # Connect to the database engine
   with engine.connect() as conn:
+    # Execute a SQL query to retrieve distinct cities from the 'room' table
     result = conn.execute(text("SELECT DISTINCT city FROM room"))
+
+    # Fetch all the cities returned by the query
     result_all_cities = result.all()
     return result_all_cities
 
@@ -23,6 +27,7 @@ def load_distinct_cities():
 # Function to get room type for the select
 def load_room_type():
   with engine.connect() as conn:
+    # Execute a SQL query to retrieve distinct room types from the 'room_type' table
     result = conn.execute(text("SELECT * FROM room_type"))
     results_list = result.all()
     result_all_room_type = dict(results_list)
@@ -32,14 +37,19 @@ def load_room_type():
 # Function to Login the user - check if the credentials are correct
 def login_user(name, pswd):
   with engine.connect() as conn:
+     # Define the SQL query with placeholders for email and password
     query = text(
       "SELECT * FROM user WHERE email = :email AND password = :pswd")
     result = conn.execute(query, {"email": name, "pswd": pswd})
+     # Fetch all the rows returned by the query
     user = result.all()
+     # Check if any rows were returned
     if result:
+      # Convert the rows to a list of dictionaries for easier access
       user_as_dict = [u._asdict() for u in user]
       return user_as_dict
     else:
+      # If no rows were returned, return None
       return None
 
 
@@ -47,22 +57,26 @@ def login_user(name, pswd):
 def register_user(name, email, password):
   with engine.connect() as conn:
     msg = ""
+    # Check if an account with the provided email already exists
     check_query = text("SELECT * FROM user WHERE email = :email")
     insert_query = text(
       "INSERT INTO user (name,email,password) VALUES (:name, :email, :password)"
     )
     check_result = conn.execute(check_query, {"email": email})
     account = check_result.fetchone()
+    # If an account exists, set the message to indicate it
     if account:
       msg = "Account already exists"
     else:
+      # Insert a new user into the 'user' table
       conn.execute(insert_query, {
         "name": name,
         "email": email,
         "password": password
       })
-      # commit changes
+      # Commit the changes to the database
       conn.commit()
+      # Set the message to indicate successful registration
       msg = "You have successfully registered"
     return msg
 

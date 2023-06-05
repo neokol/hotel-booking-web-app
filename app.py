@@ -48,16 +48,23 @@ def login_page():
 @app.route("/login", methods=["POST"])
 def login_action():
   msg = ""
+  # Retrieve the username and password from the form data
   username = request.form["username"]
   password = request.form["password"]
+  # Call the login_user function to check user credentials
   info = login_user(username, password)
   if info:
+    # Retrieve the user_id from the first item in the 'info' list
     test = info[0]["user_id"]
+
+    # Store the user_id in the session
     session["user_id"] = info[0]["user_id"]
+    # Set 'loggedin' to True in the session
     session["loggedin"] = True
     msg = "Logged in successfully!"
     return redirect(url_for("profile_page"))
   else:
+    # If the login fails, set the error message
     msg = "Incorrect username / password!"
   return render_template("signin.html", info=info, msg=msg)
 
@@ -65,14 +72,21 @@ def login_action():
 # Profile Page
 @app.route("/profile")
 def profile_page():
+   #Retrieve the user_id from the session
   user_id = get_current_user(session)
   if user_id is not None:
+    # Retrieve the booked rooms for the user
     booked_rooms = get_booked_rooms_from_user(user_id)
+
+    # Retrieve the reviews submitted by the user
     user_reviews = get_reviews_per_user(user_id)
+
+    # Render the profile.html template with the booked_rooms and user_reviews variables
     return render_template("profile.html",
                            booked_rooms=booked_rooms,
                            user_reviews=user_reviews)
   else:
+    # If the user is not logged in, redirect to the login_page route
     return redirect(url_for("login_page"))
 
 
@@ -86,9 +100,12 @@ def register_page():
 @app.route("/register", methods=["POST"])
 def register():
   message = ""
+  # Retrieve the name, email, and password from the form data
   username = request.form["name"]
   email = request.form["email"]
   password = request.form["password"]
+
+  # Call the register_user function to register the user
   message = register_user(username, email, password)
   return render_template("register.html", msg=message)
 
@@ -96,22 +113,24 @@ def register():
 # Room List Page - After Getting the data from the FORM
 @app.route("/room_list", methods=["GET"])
 def search_rooms():
-  # Get Data
+  # Get data from the form
   city = request.args.get("city")
   room_type = request.args.get("room_type")
   checkin_date = request.args.get("checkin_date")
   checkout_date = request.args.get("checkout_date")
-  # Save data to session to use them to another step
+  # Save data to session for later use
   session["city"] = city
   session["room_type"] = room_type
   session["checkin_date"] = checkin_date
   session["checkout_date"] = checkout_date
-  # Search Results
+  # Perform a search for available rooms based on the provided data
   search = search_for_rooms(city, room_type, checkin_date, checkout_date)
-  # Aside Form necessary data
+  # Retrieve necessary data for the aside form
   distinct_cities = load_distinct_cities()
   distinct_room_types = load_room_type()
   room_type_descr = get_room_type_per_room(room_type)
+
+  # Render the room_list.html template with the search results and necessary data
   return render_template(
     "room_list.html",
     search=search,
@@ -128,7 +147,7 @@ def search_rooms():
 # Room Page
 @app.route("/room_page/<room_id>")
 def show_room(room_id):
-  # Data from database
+  # # Get data from the database for the selected room
   room_info = load_room_info(room_id)
   user_id = get_current_user(session)
   type_of_room = get_room_type_per_room(room_id)
