@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for
 from helper import get_current_user
 from database import (
   load_distinct_cities,
@@ -17,12 +17,6 @@ from database import (
   search_for_rooms_extra,
   calculate_total_price,
 )
-
-from sqlalchemy import create_engine
-from sqlalchemy import text
-
-engine = create_engine(
-  "mysql+pymysql://root:password@localhost/hotel?charset=utf8mb4")
 
 app = Flask(__name__)
 app.secret_key = "your secret key"
@@ -72,7 +66,7 @@ def login_action():
 # Profile Page
 @app.route("/profile")
 def profile_page():
-   #Retrieve the user_id from the session
+  #Retrieve the user_id from the session
   user_id = get_current_user(session)
   if user_id is not None:
     # Retrieve the booked rooms for the user
@@ -257,4 +251,4 @@ def search_rooms_sidebar():
 #     return render_template("test.html", price=price)
 
 if __name__ == "__main__":
-  app.run(host="0.0.0.0", debug=True)
+  app.run(host="0.0.0.0", port=5055, debug=True)
